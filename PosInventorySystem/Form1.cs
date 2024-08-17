@@ -54,12 +54,20 @@ namespace PosInventorySystem
 
         private void label4_Click(object sender, EventArgs e)
         {
+            SignupForm signupForm = new SignupForm();
+            signupForm.Show();
 
+            this.Hide();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void login_showPass_CheckedChanged(object sender, EventArgs e)
+        {
+            login_password.PasswordChar = login_showPass.Checked ? '\0' : '*';
         }
     }
 }
