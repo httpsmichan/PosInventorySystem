@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.login_showPass = new System.Windows.Forms.CheckBox();
             this.registerlabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.login_btn = new System.Windows.Forms.Button();
@@ -37,7 +38,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.login_showPass = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -58,6 +58,18 @@
             this.panel1.Size = new System.Drawing.Size(1300, 253);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // login_showPass
+            // 
+            this.login_showPass.AutoSize = true;
+            this.login_showPass.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.login_showPass.Location = new System.Drawing.Point(682, 129);
+            this.login_showPass.Name = "login_showPass";
+            this.login_showPass.Size = new System.Drawing.Size(102, 17);
+            this.login_showPass.TabIndex = 7;
+            this.login_showPass.Text = "Show Password";
+            this.login_showPass.UseVisualStyleBackColor = true;
+            this.login_showPass.CheckedChanged += new System.EventHandler(this.login_showPass_CheckedChanged);
             // 
             // registerlabel
             // 
@@ -86,6 +98,7 @@
             // login_btn
             // 
             this.login_btn.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.login_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.login_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.login_btn.ForeColor = System.Drawing.Color.Gainsboro;
             this.login_btn.Location = new System.Drawing.Point(608, 168);
@@ -152,18 +165,6 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // login_showPass
-            // 
-            this.login_showPass.AutoSize = true;
-            this.login_showPass.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.login_showPass.Location = new System.Drawing.Point(682, 129);
-            this.login_showPass.Name = "login_showPass";
-            this.login_showPass.Size = new System.Drawing.Size(102, 17);
-            this.login_showPass.TabIndex = 7;
-            this.login_showPass.Text = "Show Password";
-            this.login_showPass.UseVisualStyleBackColor = true;
-            this.login_showPass.CheckedChanged += new System.EventHandler(this.login_showPass_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,7 +175,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Point-of-Sale (POS) with Inventory and Supply Management for Funtilon Hardware an" +
+    "d Construction Supplies";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
