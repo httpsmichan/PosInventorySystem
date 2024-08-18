@@ -44,7 +44,7 @@ namespace PosInventorySystem
                     {
                         connect.Open();
 
-                        string checkUsername = "SELECT * FROM staff WHERE username = @usern";
+                        string checkUsername = "SELECT * FROM Staff WHERE username = @usern";
 
                         using(SqlCommand cmd = new SqlCommand(checkUsername, connect ))
                         {
@@ -67,7 +67,7 @@ namespace PosInventorySystem
                             }
                             else
                             {
-                                string insertData = "INSERT INTO staff (username, password, email, mobilenum) " +
+                                string insertData = "INSERT INTO Staff (username, password, email, mobilenum) " +
                            "VALUES (@usern, @pass, @uemail, @mnum) ";
 
                                 using (SqlCommand insertD = new SqlCommand(insertData, connect))
