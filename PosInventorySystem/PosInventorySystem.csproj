@@ -46,12 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminAddCategories.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdminAddCategories.Designer.cs">
+      <DependentUpon>AdminAddCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminAddProducts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdminAddProducts.Designer.cs">
+      <DependentUpon>AdminAddProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminAddUsers.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="AdminAddUsers.Designer.cs">
       <DependentUpon>AdminAddUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="CategoriesData.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -70,6 +83,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignupForm.cs">
@@ -79,6 +93,12 @@
       <DependentUpon>SignupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UsersData.cs" />
+    <EmbeddedResource Include="AdminAddCategories.resx">
+      <DependentUpon>AdminAddCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminAddProducts.resx">
+      <DependentUpon>AdminAddProducts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminAddUsers.resx">
       <DependentUpon>AdminAddUsers.cs</DependentUpon>
     </EmbeddedResource>
