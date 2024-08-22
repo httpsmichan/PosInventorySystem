@@ -103,7 +103,7 @@ namespace PosInventorySystem
 
                                     insertD.Parameters.AddWithValue("@prodName", addprod_name.Text.Trim());
                                     insertD.Parameters.AddWithValue("@cat", addprod_category.SelectedItem);
-                                    insertD.Parameters.AddWithValue("@price", addprod_ID.Text.Trim());
+                                    insertD.Parameters.AddWithValue("@price", addprod_price.Text.Trim());
                                     insertD.Parameters.AddWithValue("@status", addprod_status.SelectedItem);
 
                                     DateTime today = DateTime.Today;
@@ -157,7 +157,7 @@ namespace PosInventorySystem
             addprod_dataGrid.Columns[1].Width = 200;
             addprod_dataGrid.Columns[2].Width = 200;
             addprod_dataGrid.Columns[3].Width = 100;
-            addprod_dataGrid.Columns[4].Width = 200;
+            addprod_dataGrid.Columns[4].Width = 100;
             addprod_dataGrid.Columns[5].Width = 200;
         }
 
@@ -287,6 +287,11 @@ namespace PosInventorySystem
                     }
                 }
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
