@@ -45,10 +45,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.addprod_status = new System.Windows.Forms.ComboBox();
             this.addprod_dataGrid = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.addprod_status = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addprod_dataGrid)).BeginInit();
             this.panel1.SuspendLayout();
@@ -60,7 +60,7 @@
             this.addprod_category.Items.AddRange(new object[] {
             "Admin",
             "Cashier"});
-            this.addprod_category.Location = new System.Drawing.Point(61, 164);
+            this.addprod_category.Location = new System.Drawing.Point(17, 287);
             this.addprod_category.Name = "addprod_category";
             this.addprod_category.Size = new System.Drawing.Size(229, 21);
             this.addprod_category.TabIndex = 25;
@@ -69,7 +69,7 @@
             // 
             this.addprod_removebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.addprod_removebtn.ForeColor = System.Drawing.Color.White;
-            this.addprod_removebtn.Location = new System.Drawing.Point(701, 236);
+            this.addprod_removebtn.Location = new System.Drawing.Point(142, 586);
             this.addprod_removebtn.Name = "addprod_removebtn";
             this.addprod_removebtn.Size = new System.Drawing.Size(93, 28);
             this.addprod_removebtn.TabIndex = 24;
@@ -81,7 +81,7 @@
             // 
             this.addprod_clearbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.addprod_clearbtn.ForeColor = System.Drawing.Color.White;
-            this.addprod_clearbtn.Location = new System.Drawing.Point(560, 236);
+            this.addprod_clearbtn.Location = new System.Drawing.Point(30, 586);
             this.addprod_clearbtn.Name = "addprod_clearbtn";
             this.addprod_clearbtn.Size = new System.Drawing.Size(93, 28);
             this.addprod_clearbtn.TabIndex = 23;
@@ -93,7 +93,7 @@
             // 
             this.addprod_updatebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.addprod_updatebtn.ForeColor = System.Drawing.Color.White;
-            this.addprod_updatebtn.Location = new System.Drawing.Point(419, 236);
+            this.addprod_updatebtn.Location = new System.Drawing.Point(142, 552);
             this.addprod_updatebtn.Name = "addprod_updatebtn";
             this.addprod_updatebtn.Size = new System.Drawing.Size(93, 28);
             this.addprod_updatebtn.TabIndex = 22;
@@ -105,7 +105,7 @@
             // 
             this.addprod_addbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.addprod_addbtn.ForeColor = System.Drawing.Color.White;
-            this.addprod_addbtn.Location = new System.Drawing.Point(277, 236);
+            this.addprod_addbtn.Location = new System.Drawing.Point(30, 552);
             this.addprod_addbtn.Name = "addprod_addbtn";
             this.addprod_addbtn.Size = new System.Drawing.Size(93, 28);
             this.addprod_addbtn.TabIndex = 21;
@@ -115,7 +115,7 @@
             // 
             // addprod_date
             // 
-            this.addprod_date.Location = new System.Drawing.Point(756, 164);
+            this.addprod_date.Location = new System.Drawing.Point(17, 428);
             this.addprod_date.Name = "addprod_date";
             this.addprod_date.Size = new System.Drawing.Size(229, 20);
             this.addprod_date.TabIndex = 20;
@@ -127,7 +127,7 @@
             this.label6.BackColor = System.Drawing.Color.White;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(753, 145);
+            this.label6.Location = new System.Drawing.Point(14, 409);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(91, 16);
             this.label6.TabIndex = 19;
@@ -135,7 +135,7 @@
             // 
             // addprod_price
             // 
-            this.addprod_price.Location = new System.Drawing.Point(756, 80);
+            this.addprod_price.Location = new System.Drawing.Point(17, 221);
             this.addprod_price.Name = "addprod_price";
             this.addprod_price.Size = new System.Drawing.Size(229, 20);
             this.addprod_price.TabIndex = 18;
@@ -147,7 +147,7 @@
             this.label7.BackColor = System.Drawing.Color.White;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(756, 61);
+            this.label7.Location = new System.Drawing.Point(17, 202);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 16);
             this.label7.TabIndex = 17;
@@ -160,7 +160,7 @@
             this.label4.BackColor = System.Drawing.Color.White;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(405, 145);
+            this.label4.Location = new System.Drawing.Point(14, 335);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 16);
             this.label4.TabIndex = 15;
@@ -168,7 +168,7 @@
             // 
             // addprod_name
             // 
-            this.addprod_name.Location = new System.Drawing.Point(408, 80);
+            this.addprod_name.Location = new System.Drawing.Point(17, 159);
             this.addprod_name.Name = "addprod_name";
             this.addprod_name.Size = new System.Drawing.Size(229, 20);
             this.addprod_name.TabIndex = 14;
@@ -180,7 +180,7 @@
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(405, 61);
+            this.label5.Location = new System.Drawing.Point(14, 140);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 16);
             this.label5.TabIndex = 13;
@@ -193,7 +193,7 @@
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(58, 145);
+            this.label2.Location = new System.Drawing.Point(14, 268);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 16);
             this.label2.TabIndex = 11;
@@ -201,7 +201,7 @@
             // 
             // addprod_ID
             // 
-            this.addprod_ID.Location = new System.Drawing.Point(61, 80);
+            this.addprod_ID.Location = new System.Drawing.Point(17, 100);
             this.addprod_ID.Name = "addprod_ID";
             this.addprod_ID.Size = new System.Drawing.Size(229, 20);
             this.addprod_ID.TabIndex = 10;
@@ -213,7 +213,7 @@
             this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(58, 61);
+            this.label3.Location = new System.Drawing.Point(14, 81);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 16);
             this.label3.TabIndex = 9;
@@ -224,7 +224,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(21, 15);
+            this.label1.Location = new System.Drawing.Point(11, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(131, 18);
             this.label1.TabIndex = 8;
@@ -235,6 +235,7 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.addprod_status);
             this.panel2.Controls.Add(this.addprod_category);
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.addprod_removebtn);
             this.panel2.Controls.Add(this.addprod_clearbtn);
             this.panel2.Controls.Add(this.addprod_updatebtn);
@@ -249,18 +250,28 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.addprod_ID);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label1);
             this.panel2.ForeColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(14, 435);
+            this.panel2.Location = new System.Drawing.Point(798, 13);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1048, 318);
+            this.panel2.Size = new System.Drawing.Size(265, 738);
             this.panel2.TabIndex = 3;
+            // 
+            // addprod_status
+            // 
+            this.addprod_status.FormattingEnabled = true;
+            this.addprod_status.Items.AddRange(new object[] {
+            "Available",
+            "Not Available"});
+            this.addprod_status.Location = new System.Drawing.Point(17, 353);
+            this.addprod_status.Name = "addprod_status";
+            this.addprod_status.Size = new System.Drawing.Size(229, 21);
+            this.addprod_status.TabIndex = 26;
             // 
             // addprod_dataGrid
             // 
             this.addprod_dataGrid.Location = new System.Drawing.Point(13, 36);
             this.addprod_dataGrid.Name = "addprod_dataGrid";
-            this.addprod_dataGrid.Size = new System.Drawing.Size(1020, 352);
+            this.addprod_dataGrid.Size = new System.Drawing.Size(749, 687);
             this.addprod_dataGrid.TabIndex = 0;
             this.addprod_dataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.addprod_dataGrid_CellClick);
             // 
@@ -271,8 +282,9 @@
             this.panel1.Controls.Add(this.addprod_dataGrid);
             this.panel1.Location = new System.Drawing.Point(14, 13);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1048, 402);
+            this.panel1.Size = new System.Drawing.Size(778, 738);
             this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label8
             // 
@@ -284,17 +296,6 @@
             this.label8.Size = new System.Drawing.Size(99, 18);
             this.label8.TabIndex = 26;
             this.label8.Text = "All Products";
-            // 
-            // addprod_status
-            // 
-            this.addprod_status.FormattingEnabled = true;
-            this.addprod_status.Items.AddRange(new object[] {
-            "Available",
-            "Not Available"});
-            this.addprod_status.Location = new System.Drawing.Point(408, 163);
-            this.addprod_status.Name = "addprod_status";
-            this.addprod_status.Size = new System.Drawing.Size(229, 21);
-            this.addprod_status.TabIndex = 26;
             // 
             // AdminAddProducts
             // 

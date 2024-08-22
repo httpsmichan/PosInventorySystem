@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
-using System.Runtime.Remoting.Contexts;
+using System.Windows.Forms;
 
 namespace PosInventorySystem
 {
@@ -67,24 +59,43 @@ namespace PosInventorySystem
                 {
                     connect.Open();
 
-                    string selectData = "SELECT * FROM Staff WHERE username = @usern AND password = @pass";
+                    string selectData = "SELECT COUNT (*) FROM Staff WHERE username = @usern AND password = @pass";
 
-                    using(SqlCommand cmd = new SqlCommand(selectData, connect))
+                    using (SqlCommand cmd = new SqlCommand(selectData, connect))
                     {
                         cmd.Parameters.AddWithValue("@usern", login_username.Text.Trim());
                         cmd.Parameters.AddWithValue("@pass", login_password.Text.Trim());
 
-                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        DataTable table = new DataTable();
-                        adapter.Fill(table);
+                        int rowCount = (int)cmd.ExecuteScalar();
 
-                        if(table.Rows.Count > 0)
+
+
+                        if (rowCount > 0)
                         {
-                            MessageBox.Show("Login successfully!", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            
-                            MainForm mForm = new MainForm();
-                            mForm.Show();
-                            this.Hide();
+                            string selectRole = "SELECT Role From Staff WHERE username = @usern AND password = @pass";
+
+                            using (SqlCommand getRole = new SqlCommand(selectRole, connect))
+                            {
+                                getRole.Parameters.AddWithValue("@usern", login_username.Text.Trim());
+                                getRole.Parameters.AddWithValue("@pass", login_password.Text.Trim());
+
+                                string userRole = getRole.ExecuteScalar() as string;
+
+                                MessageBox.Show("Login successfully!", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                if (userRole == "Admin")
+                                {
+                                    MainForm mForm = new MainForm();
+                                    mForm.Show();
+                                    this.Hide();
+                                }
+                                else if (userRole == "Cashier")
+                                {
+                                    CashierMainForm cForm = new CashierMainForm();
+                                    cForm.Show();
+                                    this.Hide();
+                                }
+                            }
                         }
                         else
                         {
@@ -93,7 +104,7 @@ namespace PosInventorySystem
 
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Connection failed: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
