@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace PosInventorySystem
 {
@@ -10,6 +11,7 @@ namespace PosInventorySystem
         SqlConnection
             connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\cabri\Documents\Funtilon.mdf;Integrated Security=True;Connect Timeout=30");
 
+        public int PurchaseID { set; get; }
         public string CustomerID { set; get; }
         public string ProductID { set; get; }
         public string ProductName { set; get; }
@@ -23,7 +25,7 @@ namespace PosInventorySystem
         {
             List<OrdersData> listData = new List<OrdersData>();
 
-            if (connect.State == System.Data.ConnectionState.Closed)
+            if (connect.State == ConnectionState.Closed)
             {
                 try
                 {
@@ -64,19 +66,19 @@ namespace PosInventorySystem
                         while (reader.Read())
                         {
                             OrdersData oData = new OrdersData();
+                            oData.PurchaseID = (int)reader["PurchaseID"];
                             oData.CustomerID = reader["CustomerID"].ToString();
                             oData.ProductID = reader["ProductID"].ToString();
                             oData.ProductName = reader["ProductName"].ToString();
                             oData.Category = reader["Category"].ToString();
                             oData.OriginalPrice = reader["OriginalPrice"].ToString();
                             oData.Quantity = reader["Quantity"].ToString();
-                            oData.Subtotal = reader["TotalPrice"].ToString();
+                            oData.Subtotal = reader["Subtotal"].ToString();
                             oData.OrderDate = reader["OrderDate"].ToString();
 
                             listData.Add(oData);
                         }
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -86,8 +88,11 @@ namespace PosInventorySystem
                 {
                     connect.Close();
                 }
+
+               
             }
             return listData;
         }
+
     }
 }

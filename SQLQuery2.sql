@@ -17,6 +17,8 @@ CREATE TABLE Customers
 	Email VARCHAR(MAX) NULL,
 )
 
+
+
 CREATE TABLE Purchase
 (
 	PurchaseID int PRIMARY KEY IDENTITY (00,1), 

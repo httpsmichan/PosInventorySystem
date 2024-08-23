@@ -16,6 +16,7 @@ namespace PosInventorySystem
             displayAllAvailableProducts();
             displayAllCategories();
             displayOrders();
+            displayTotalPrice();
         }
 
         public void displayAllAvailableProducts()
@@ -101,7 +102,9 @@ namespace PosInventorySystem
             OrdersData oData = new OrdersData();
             List<OrdersData> listData = oData.allOrdersData();
 
-            order_Gridview2.DataSource = listData;
+            dataGridView1.DataSource = listData;
+
+
 
         }
 
@@ -255,7 +258,7 @@ namespace PosInventorySystem
 
                             cmd.ExecuteNonQuery();
 
-                            displayOrders();
+
                         }
                     }
                     catch (Exception ex)
@@ -269,6 +272,7 @@ namespace PosInventorySystem
                 }
             }
             displayOrders();
+            displayTotalPrice();
         }
 
         private int idGen;
@@ -289,12 +293,222 @@ namespace PosInventorySystem
                     if (result != DBNull.Value)
                     {
                         int temp = Convert.ToInt32(result);
-                        idGen = temp + 1;
+
+                        if (temp == 0)
+                        {
+                            idGen = 1;
+                        }
+                        else
+                        {
+                            idGen = temp + 1;
+                        }
                     }
                     else
                     {
                         idGen = 1;
                     }
+                }
+            }
+        }
+
+        private float totalPrice = 0;
+        public void displayTotalPrice()
+        {
+            IDGenerator();
+
+            if (checkConnection())
+            {
+                try
+                {
+                    connect.Open();
+
+                    string selectData = "SELECT SUM (Subtotal) FROM Purchase WHERE CustomerID = @catID";
+
+                    using (SqlCommand cmd = new SqlCommand(@selectData, connect))
+                    {
+                        cmd.Parameters.AddWithValue("catID", idGen);
+
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != DBNull.Value)
+                        {
+                            totalPrice = Convert.ToSingle(result);
+
+                            order_Totalprice.Text = totalPrice.ToString("0.00");
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Connection failed: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    connect.Close();
+                }
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void order_Gridview1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private int prodID = 0;
+        private void order_Gridview1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void order_removebtn_Click(object sender, EventArgs e)
+        {
+            if (prodID == 0)
+            {
+                MessageBox.Show("Select an item first", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (MessageBox.Show("Are you sure you want to remove ID: " + prodID + "?", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (checkConnection())
+                    {
+                        try
+                        {
+                            connect.Open();
+
+                            string deleteData = "DELETE FROM Purchase WHERE PurchaseID = @pID";
+
+                            using (SqlCommand cmd = new SqlCommand(deleteData, connect))
+                            {
+                                cmd.Parameters.AddWithValue("@pID", prodID);
+                                cmd.ExecuteNonQuery();
+
+                                MessageBox.Show("Removed Successfully", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Connection failed: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        finally
+                        {
+                            connect.Close();
+                        }
+                    }
+                }
+            }
+            displayOrders();
+            displayTotalPrice();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+                prodID = (int)row.Cells[0].Value;
+
+            }
+        }
+
+        public void clearFields()
+        {
+            order_Cat.SelectedIndex = -1;
+            order_prodID.SelectedIndex = -1;
+            order_prodName.Text = "";
+            order_Totalprice.Text = "";
+            order_qty.Value = 0;
+        }
+        private void order_clearbtn_Click(object sender, EventArgs e)
+        {
+            clearFields();
+        }
+
+        private void order_PayOrder_Click(object sender, EventArgs e)
+        {
+            IDGenerator();
+
+            if (order_Cashamount.Text == "" || dataGridView1.Rows.Count < 0)
+            {
+                MessageBox.Show("Something went wrong", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (MessageBox.Show("Are you sure to pay your orders? ", "Confirmation Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (checkConnection())
+                    {
+                        try
+                        {
+                            connect.Open();
+
+                            string insertData = "INSERT INTO Billing (CustomerID, ProductID, TotalPrice, Amount, Change, OrderDate)" +
+                                "VALUES (@cID, @pID, @totalP, @amount, @change, @odate)";
+
+                            using (SqlCommand cmd = new SqlCommand(insertData, connect))
+                            {
+                                cmd.Parameters.AddWithValue("@cID", idGen);
+                                cmd.Parameters.AddWithValue("@pID", order_prodID.Text);
+                                cmd.Parameters.AddWithValue("@totalP", order_Totalprice.Text);
+                                cmd.Parameters.AddWithValue("@amount", order_Cashamount.Text);
+                                cmd.Parameters.AddWithValue("@change", order_Change.Text);
+
+                                DateTime today = DateTime.Today;
+                                cmd.Parameters.AddWithValue("@odate", today);
+
+                                cmd.ExecuteNonQuery();
+                                clearFields();
+
+                                MessageBox.Show("Paid Successfully", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Connection failed: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        finally
+                        {
+                            connect.Close();
+                        }
+                    }
+                }
+            }
+            displayTotalPrice();
+
+        }
+
+        private void order_Cashamount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    float getAmount = Convert.ToSingle(order_Cashamount.Text);
+                    float getChange = (getAmount - totalPrice);
+
+                    if (getChange <= -1)
+                    {
+                        order_Cashamount.Text = "";
+                        order_Change.Text = "";
+                    }
+                    else
+                    {
+                        order_Change.Text = getChange.ToString("0.00");
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    order_Cashamount.Text = "";
+                    order_Change.Text = "";
                 }
             }
         }
