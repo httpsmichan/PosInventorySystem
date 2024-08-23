@@ -33,9 +33,11 @@
             this.order_Gridview1 = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.category_clearbtn = new System.Windows.Forms.Button();
-            this.category_removebtn = new System.Windows.Forms.Button();
-            this.category_addbtn = new System.Windows.Forms.Button();
+            this.order_qty = new System.Windows.Forms.NumericUpDown();
+            this.order_prodID = new System.Windows.Forms.ComboBox();
+            this.order_clearbtn = new System.Windows.Forms.Button();
+            this.order_removebtn = new System.Windows.Forms.Button();
+            this.order_addbtn = new System.Windows.Forms.Button();
             this.order_Cat = new System.Windows.Forms.ComboBox();
             this.order_price = new System.Windows.Forms.Label();
             this.order_Remstock = new System.Windows.Forms.Label();
@@ -57,16 +59,14 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.order_Gridview2 = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.order_prodID = new System.Windows.Forms.ComboBox();
-            this.order_qty = new System.Windows.Forms.NumericUpDown();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.order_Gridview1)).BeginInit();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.order_Gridview2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.order_qty)).BeginInit();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -93,11 +93,14 @@
             // 
             // order_Gridview1
             // 
+            this.order_Gridview1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.order_Gridview1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.order_Gridview1.Location = new System.Drawing.Point(14, 30);
             this.order_Gridview1.Name = "order_Gridview1";
             this.order_Gridview1.Size = new System.Drawing.Size(661, 379);
             this.order_Gridview1.TabIndex = 2;
+            this.order_Gridview1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.order_Gridview1_CellClick);
+            this.order_Gridview1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.order_Gridview1_CellContentClick);
             // 
             // panel3
             // 
@@ -111,9 +114,9 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.order_qty);
             this.panel2.Controls.Add(this.order_prodID);
-            this.panel2.Controls.Add(this.category_clearbtn);
-            this.panel2.Controls.Add(this.category_removebtn);
-            this.panel2.Controls.Add(this.category_addbtn);
+            this.panel2.Controls.Add(this.order_clearbtn);
+            this.panel2.Controls.Add(this.order_removebtn);
+            this.panel2.Controls.Add(this.order_addbtn);
             this.panel2.Controls.Add(this.order_Cat);
             this.panel2.Controls.Add(this.order_price);
             this.panel2.Controls.Add(this.order_Remstock);
@@ -131,39 +134,57 @@
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
-            // category_clearbtn
+            // order_qty
             // 
-            this.category_clearbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.category_clearbtn.ForeColor = System.Drawing.Color.White;
-            this.category_clearbtn.Location = new System.Drawing.Point(475, 258);
-            this.category_clearbtn.Name = "category_clearbtn";
-            this.category_clearbtn.Size = new System.Drawing.Size(93, 28);
-            this.category_clearbtn.TabIndex = 30;
-            this.category_clearbtn.Text = "Clear";
-            this.category_clearbtn.UseVisualStyleBackColor = false;
+            this.order_qty.Location = new System.Drawing.Point(70, 210);
+            this.order_qty.Name = "order_qty";
+            this.order_qty.Size = new System.Drawing.Size(229, 20);
+            this.order_qty.TabIndex = 32;
             // 
-            // category_removebtn
+            // order_prodID
             // 
-            this.category_removebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.category_removebtn.ForeColor = System.Drawing.Color.White;
-            this.category_removebtn.Location = new System.Drawing.Point(578, 258);
-            this.category_removebtn.Name = "category_removebtn";
-            this.category_removebtn.Size = new System.Drawing.Size(93, 28);
-            this.category_removebtn.TabIndex = 28;
-            this.category_removebtn.Text = "Remove";
-            this.category_removebtn.UseVisualStyleBackColor = false;
+            this.order_prodID.FormattingEnabled = true;
+            this.order_prodID.Location = new System.Drawing.Point(70, 139);
+            this.order_prodID.Name = "order_prodID";
+            this.order_prodID.Size = new System.Drawing.Size(229, 21);
+            this.order_prodID.TabIndex = 31;
+            this.order_prodID.SelectedIndexChanged += new System.EventHandler(this.order_prodID_SelectedIndexChanged);
             // 
-            // category_addbtn
+            // order_clearbtn
             // 
-            this.category_addbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.category_addbtn.ForeColor = System.Drawing.Color.White;
-            this.category_addbtn.Location = new System.Drawing.Point(373, 258);
-            this.category_addbtn.Name = "category_addbtn";
-            this.category_addbtn.Size = new System.Drawing.Size(93, 28);
-            this.category_addbtn.TabIndex = 27;
-            this.category_addbtn.Text = "Add";
-            this.category_addbtn.UseVisualStyleBackColor = false;
-            this.category_addbtn.Click += new System.EventHandler(this.category_addbtn_Click);
+            this.order_clearbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.order_clearbtn.ForeColor = System.Drawing.Color.White;
+            this.order_clearbtn.Location = new System.Drawing.Point(475, 258);
+            this.order_clearbtn.Name = "order_clearbtn";
+            this.order_clearbtn.Size = new System.Drawing.Size(93, 28);
+            this.order_clearbtn.TabIndex = 30;
+            this.order_clearbtn.Text = "Clear";
+            this.order_clearbtn.UseVisualStyleBackColor = false;
+            this.order_clearbtn.Click += new System.EventHandler(this.order_clearbtn_Click);
+            // 
+            // order_removebtn
+            // 
+            this.order_removebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.order_removebtn.ForeColor = System.Drawing.Color.White;
+            this.order_removebtn.Location = new System.Drawing.Point(578, 258);
+            this.order_removebtn.Name = "order_removebtn";
+            this.order_removebtn.Size = new System.Drawing.Size(93, 28);
+            this.order_removebtn.TabIndex = 28;
+            this.order_removebtn.Text = "Remove";
+            this.order_removebtn.UseVisualStyleBackColor = false;
+            this.order_removebtn.Click += new System.EventHandler(this.order_removebtn_Click);
+            // 
+            // order_addbtn
+            // 
+            this.order_addbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.order_addbtn.ForeColor = System.Drawing.Color.White;
+            this.order_addbtn.Location = new System.Drawing.Point(373, 258);
+            this.order_addbtn.Name = "order_addbtn";
+            this.order_addbtn.Size = new System.Drawing.Size(93, 28);
+            this.order_addbtn.TabIndex = 27;
+            this.order_addbtn.Text = "Add";
+            this.order_addbtn.UseVisualStyleBackColor = false;
+            this.order_addbtn.Click += new System.EventHandler(this.category_addbtn_Click);
             // 
             // order_Cat
             // 
@@ -307,7 +328,9 @@
             // 
             // panel4
             // 
+            this.panel4.AccessibleRole = System.Windows.Forms.AccessibleRole.WhiteSpace;
             this.panel4.BackColor = System.Drawing.Color.White;
+            this.panel4.Controls.Add(this.dataGridView1);
             this.panel4.Controls.Add(this.order_Printreceipt);
             this.panel4.Controls.Add(this.order_PayOrder);
             this.panel4.Controls.Add(this.order_Cashamount);
@@ -317,7 +340,6 @@
             this.panel4.Controls.Add(this.label11);
             this.panel4.Controls.Add(this.label10);
             this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.order_Gridview2);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Location = new System.Drawing.Point(709, 15);
             this.panel4.Name = "panel4";
@@ -339,12 +361,13 @@
             // 
             this.order_PayOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.order_PayOrder.ForeColor = System.Drawing.Color.White;
-            this.order_PayOrder.Location = new System.Drawing.Point(74, 634);
+            this.order_PayOrder.Location = new System.Drawing.Point(74, 636);
             this.order_PayOrder.Name = "order_PayOrder";
             this.order_PayOrder.Size = new System.Drawing.Size(205, 28);
             this.order_PayOrder.TabIndex = 31;
             this.order_PayOrder.Text = "Pay Order/s";
             this.order_PayOrder.UseVisualStyleBackColor = false;
+            this.order_PayOrder.Click += new System.EventHandler(this.order_PayOrder_Click);
             // 
             // order_Cashamount
             // 
@@ -352,6 +375,7 @@
             this.order_Cashamount.Name = "order_Cashamount";
             this.order_Cashamount.Size = new System.Drawing.Size(151, 20);
             this.order_Cashamount.TabIndex = 31;
+            this.order_Cashamount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.order_Cashamount_KeyDown);
             // 
             // order_Change
             // 
@@ -360,7 +384,7 @@
             this.order_Change.BackColor = System.Drawing.Color.White;
             this.order_Change.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.order_Change.ForeColor = System.Drawing.Color.Black;
-            this.order_Change.Location = new System.Drawing.Point(106, 551);
+            this.order_Change.Location = new System.Drawing.Point(126, 551);
             this.order_Change.Name = "order_Change";
             this.order_Change.Size = new System.Drawing.Size(35, 16);
             this.order_Change.TabIndex = 34;
@@ -388,9 +412,9 @@
             this.label12.ForeColor = System.Drawing.Color.Black;
             this.label12.Location = new System.Drawing.Point(40, 551);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(60, 16);
+            this.label12.Size = new System.Drawing.Size(80, 16);
             this.label12.TabIndex = 31;
-            this.label12.Text = "Change: ";
+            this.label12.Text = "Change (₱): ";
             // 
             // label11
             // 
@@ -429,14 +453,6 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "All Order/s";
             // 
-            // order_Gridview2
-            // 
-            this.order_Gridview2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.order_Gridview2.Location = new System.Drawing.Point(13, 30);
-            this.order_Gridview2.Name = "order_Gridview2";
-            this.order_Gridview2.Size = new System.Drawing.Size(325, 379);
-            this.order_Gridview2.TabIndex = 14;
-            // 
             // panel5
             // 
             this.panel5.Location = new System.Drawing.Point(706, 0);
@@ -444,21 +460,14 @@
             this.panel5.Size = new System.Drawing.Size(344, 377);
             this.panel5.TabIndex = 1;
             // 
-            // order_prodID
+            // dataGridView1
             // 
-            this.order_prodID.FormattingEnabled = true;
-            this.order_prodID.Location = new System.Drawing.Point(70, 139);
-            this.order_prodID.Name = "order_prodID";
-            this.order_prodID.Size = new System.Drawing.Size(229, 21);
-            this.order_prodID.TabIndex = 31;
-            this.order_prodID.SelectedIndexChanged += new System.EventHandler(this.order_prodID_SelectedIndexChanged);
-            // 
-            // order_qty
-            // 
-            this.order_qty.Location = new System.Drawing.Point(70, 210);
-            this.order_qty.Name = "order_qty";
-            this.order_qty.Size = new System.Drawing.Size(229, 20);
-            this.order_qty.TabIndex = 32;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(16, 30);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(325, 379);
+            this.dataGridView1.TabIndex = 36;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // Orders
             // 
@@ -474,10 +483,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.order_Gridview1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.order_qty)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.order_Gridview2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.order_qty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -492,7 +501,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView order_Gridview2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -504,9 +512,9 @@
         private System.Windows.Forms.ComboBox order_Cat;
         private System.Windows.Forms.Label order_price;
         private System.Windows.Forms.Label order_Remstock;
-        private System.Windows.Forms.Button category_clearbtn;
-        private System.Windows.Forms.Button category_removebtn;
-        private System.Windows.Forms.Button category_addbtn;
+        private System.Windows.Forms.Button order_clearbtn;
+        private System.Windows.Forms.Button order_removebtn;
+        private System.Windows.Forms.Button order_addbtn;
         private System.Windows.Forms.Button order_Printreceipt;
         private System.Windows.Forms.Button order_PayOrder;
         private System.Windows.Forms.TextBox order_Cashamount;
@@ -517,5 +525,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox order_prodID;
         private System.Windows.Forms.NumericUpDown order_qty;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
