@@ -37,14 +37,16 @@
             this.categories_btn = new System.Windows.Forms.Button();
             this.dashboard_btn = new System.Windows.Forms.Button();
             this.cashier = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dashboard1 = new PosInventorySystem.Dashboard();
             this.adminAddProducts1 = new PosInventorySystem.AdminAddProducts();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.orders1 = new PosInventorySystem.Orders();
+            this.cashierCustomerForm1 = new PosInventorySystem.CashierCustomerForm();
+            this.adminAddCategories1 = new PosInventorySystem.AdminAddCategories();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -110,6 +112,7 @@
             this.customer_btn.Text = "       Customer\'s Info";
             this.customer_btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.customer_btn.UseVisualStyleBackColor = true;
+            this.customer_btn.Click += new System.EventHandler(this.customer_btn_Click);
             // 
             // orders_btn
             // 
@@ -126,6 +129,7 @@
             this.orders_btn.Text = "       Orders";
             this.orders_btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.orders_btn.UseVisualStyleBackColor = true;
+            this.orders_btn.Click += new System.EventHandler(this.orders_btn_Click);
             // 
             // products_btn
             // 
@@ -142,6 +146,7 @@
             this.products_btn.Text = "       Products";
             this.products_btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.products_btn.UseVisualStyleBackColor = true;
+            this.products_btn.Click += new System.EventHandler(this.products_btn_Click);
             // 
             // categories_btn
             // 
@@ -158,6 +163,7 @@
             this.categories_btn.Text = "       Categories";
             this.categories_btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.categories_btn.UseVisualStyleBackColor = true;
+            this.categories_btn.Click += new System.EventHandler(this.categories_btn_Click);
             // 
             // dashboard_btn
             // 
@@ -174,6 +180,7 @@
             this.dashboard_btn.Text = "       Dashboard";
             this.dashboard_btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.dashboard_btn.UseVisualStyleBackColor = true;
+            this.dashboard_btn.Click += new System.EventHandler(this.dashboard_btn_Click);
             // 
             // cashier
             // 
@@ -186,11 +193,23 @@
             this.cashier.TabIndex = 1;
             this.cashier.Text = "@Cashier";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PosInventorySystem.Properties.Resources.admin;
+            this.pictureBox1.Location = new System.Drawing.Point(65, 35);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.orders1);
-            this.panel2.Controls.Add(this.adminAddProducts1);
+            this.panel2.Controls.Add(this.adminAddCategories1);
             this.panel2.Controls.Add(this.dashboard1);
+            this.panel2.Controls.Add(this.adminAddProducts1);
+            this.panel2.Controls.Add(this.orders1);
+            this.panel2.Controls.Add(this.cashierCustomerForm1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(221, 0);
             this.panel2.Name = "panel2";
@@ -202,31 +221,36 @@
             this.dashboard1.Location = new System.Drawing.Point(0, 0);
             this.dashboard1.Name = "dashboard1";
             this.dashboard1.Size = new System.Drawing.Size(1076, 767);
-            this.dashboard1.TabIndex = 0;
+            this.dashboard1.TabIndex = 3;
+            this.dashboard1.Load += new System.EventHandler(this.dashboard1_Load);
             // 
             // adminAddProducts1
             // 
             this.adminAddProducts1.Location = new System.Drawing.Point(0, 0);
             this.adminAddProducts1.Name = "adminAddProducts1";
             this.adminAddProducts1.Size = new System.Drawing.Size(1076, 767);
-            this.adminAddProducts1.TabIndex = 1;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::PosInventorySystem.Properties.Resources.admin;
-            this.pictureBox1.Location = new System.Drawing.Point(65, 35);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.adminAddProducts1.TabIndex = 2;
             // 
             // orders1
             // 
             this.orders1.Location = new System.Drawing.Point(0, 0);
             this.orders1.Name = "orders1";
             this.orders1.Size = new System.Drawing.Size(1076, 767);
-            this.orders1.TabIndex = 2;
+            this.orders1.TabIndex = 1;
+            // 
+            // cashierCustomerForm1
+            // 
+            this.cashierCustomerForm1.Location = new System.Drawing.Point(0, 0);
+            this.cashierCustomerForm1.Name = "cashierCustomerForm1";
+            this.cashierCustomerForm1.Size = new System.Drawing.Size(1076, 767);
+            this.cashierCustomerForm1.TabIndex = 0;
+            // 
+            // adminAddCategories1
+            // 
+            this.adminAddCategories1.Location = new System.Drawing.Point(0, 0);
+            this.adminAddCategories1.Name = "adminAddCategories1";
+            this.adminAddCategories1.Size = new System.Drawing.Size(1076, 767);
+            this.adminAddCategories1.TabIndex = 4;
             // 
             // CashierMainForm
             // 
@@ -241,8 +265,8 @@
             this.Text = "CashierMainForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -260,8 +284,10 @@
         private System.Windows.Forms.Button dashboard_btn;
         private System.Windows.Forms.Label cashier;
         private System.Windows.Forms.Panel panel2;
-        private AdminAddProducts adminAddProducts1;
         private Dashboard dashboard1;
+        private AdminAddProducts adminAddProducts1;
         private Orders orders1;
+        private CashierCustomerForm cashierCustomerForm1;
+        private AdminAddCategories adminAddCategories1;
     }
 }

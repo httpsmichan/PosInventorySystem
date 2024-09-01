@@ -38,16 +38,16 @@
             this.categories_btn = new System.Windows.Forms.Button();
             this.dashboard_btn = new System.Windows.Forms.Button();
             this.admin = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.adminAddProducts1 = new PosInventorySystem.AdminAddProducts();
-            this.adminAddCategories1 = new PosInventorySystem.AdminAddCategories();
-            this.adminAddUsers1 = new PosInventorySystem.AdminAddUsers();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.dashboard1 = new PosInventorySystem.Dashboard();
-            this.adminAddUsers2 = new PosInventorySystem.AdminAddUsers();
+            this.adminAddCategories1 = new PosInventorySystem.AdminAddCategories();
+            this.adminAddProducts1 = new PosInventorySystem.AdminAddProducts();
+            this.adminAddUsers1 = new PosInventorySystem.AdminAddUsers();
+            this.cashierCustomerForm1 = new PosInventorySystem.CashierCustomerForm();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -130,6 +130,7 @@
             this.customer_btn.Text = "       Customer\'s Info";
             this.customer_btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.customer_btn.UseVisualStyleBackColor = true;
+            this.customer_btn.Click += new System.EventHandler(this.customer_btn_Click);
             // 
             // staff_btn
             // 
@@ -146,6 +147,7 @@
             this.staff_btn.Text = "       Staff\'s Info";
             this.staff_btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.staff_btn.UseVisualStyleBackColor = true;
+            this.staff_btn.Click += new System.EventHandler(this.staff_btn_Click);
             // 
             // products_btn
             // 
@@ -162,6 +164,7 @@
             this.products_btn.Text = "       Products";
             this.products_btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.products_btn.UseVisualStyleBackColor = true;
+            this.products_btn.Click += new System.EventHandler(this.products_btn_Click);
             // 
             // categories_btn
             // 
@@ -178,6 +181,7 @@
             this.categories_btn.Text = "       Categories";
             this.categories_btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.categories_btn.UseVisualStyleBackColor = true;
+            this.categories_btn.Click += new System.EventHandler(this.categories_btn_Click);
             // 
             // dashboard_btn
             // 
@@ -194,6 +198,7 @@
             this.dashboard_btn.Text = "       Dashboard";
             this.dashboard_btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.dashboard_btn.UseVisualStyleBackColor = true;
+            this.dashboard_btn.Click += new System.EventHandler(this.dashboard_btn_Click);
             // 
             // admin
             // 
@@ -206,19 +211,6 @@
             this.admin.TabIndex = 1;
             this.admin.Text = "@Admin";
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.adminAddUsers2);
-            this.panel2.Controls.Add(this.adminAddProducts1);
-            this.panel2.Controls.Add(this.adminAddCategories1);
-            this.panel2.Controls.Add(this.adminAddUsers1);
-            this.panel2.Controls.Add(this.dashboard1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(221, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1076, 767);
-            this.panel2.TabIndex = 1;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::PosInventorySystem.Properties.Resources.admin;
@@ -229,26 +221,18 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // adminAddProducts1
+            // panel2
             // 
-            this.adminAddProducts1.Location = new System.Drawing.Point(0, 0);
-            this.adminAddProducts1.Name = "adminAddProducts1";
-            this.adminAddProducts1.Size = new System.Drawing.Size(1076, 767);
-            this.adminAddProducts1.TabIndex = 3;
-            // 
-            // adminAddCategories1
-            // 
-            this.adminAddCategories1.Location = new System.Drawing.Point(0, 0);
-            this.adminAddCategories1.Name = "adminAddCategories1";
-            this.adminAddCategories1.Size = new System.Drawing.Size(1076, 767);
-            this.adminAddCategories1.TabIndex = 2;
-            // 
-            // adminAddUsers1
-            // 
-            this.adminAddUsers1.Location = new System.Drawing.Point(-3, 0);
-            this.adminAddUsers1.Name = "adminAddUsers1";
-            this.adminAddUsers1.Size = new System.Drawing.Size(1076, 767);
-            this.adminAddUsers1.TabIndex = 1;
+            this.panel2.Controls.Add(this.cashierCustomerForm1);
+            this.panel2.Controls.Add(this.adminAddUsers1);
+            this.panel2.Controls.Add(this.adminAddProducts1);
+            this.panel2.Controls.Add(this.adminAddCategories1);
+            this.panel2.Controls.Add(this.dashboard1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(221, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1076, 767);
+            this.panel2.TabIndex = 1;
             // 
             // dashboard1
             // 
@@ -257,12 +241,33 @@
             this.dashboard1.Size = new System.Drawing.Size(1076, 767);
             this.dashboard1.TabIndex = 0;
             // 
-            // adminAddUsers2
+            // adminAddCategories1
             // 
-            this.adminAddUsers2.Location = new System.Drawing.Point(0, 0);
-            this.adminAddUsers2.Name = "adminAddUsers2";
-            this.adminAddUsers2.Size = new System.Drawing.Size(1076, 767);
-            this.adminAddUsers2.TabIndex = 4;
+            this.adminAddCategories1.Location = new System.Drawing.Point(0, 0);
+            this.adminAddCategories1.Name = "adminAddCategories1";
+            this.adminAddCategories1.Size = new System.Drawing.Size(1076, 767);
+            this.adminAddCategories1.TabIndex = 1;
+            // 
+            // adminAddProducts1
+            // 
+            this.adminAddProducts1.Location = new System.Drawing.Point(0, 0);
+            this.adminAddProducts1.Name = "adminAddProducts1";
+            this.adminAddProducts1.Size = new System.Drawing.Size(1076, 767);
+            this.adminAddProducts1.TabIndex = 2;
+            // 
+            // adminAddUsers1
+            // 
+            this.adminAddUsers1.Location = new System.Drawing.Point(0, 0);
+            this.adminAddUsers1.Name = "adminAddUsers1";
+            this.adminAddUsers1.Size = new System.Drawing.Size(1076, 767);
+            this.adminAddUsers1.TabIndex = 3;
+            // 
+            // cashierCustomerForm1
+            // 
+            this.cashierCustomerForm1.Location = new System.Drawing.Point(0, 0);
+            this.cashierCustomerForm1.Name = "cashierCustomerForm1";
+            this.cashierCustomerForm1.Size = new System.Drawing.Size(1076, 767);
+            this.cashierCustomerForm1.TabIndex = 4;
             // 
             // MainForm
             // 
@@ -278,8 +283,8 @@
     "d Construction Supplies";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -298,10 +303,10 @@
         private System.Windows.Forms.Button inventory_btn;
         private System.Windows.Forms.Button logout_btn;
         private System.Windows.Forms.Panel panel2;
-        private Dashboard dashboard1;
+        private CashierCustomerForm cashierCustomerForm1;
         private AdminAddUsers adminAddUsers1;
         private AdminAddProducts adminAddProducts1;
         private AdminAddCategories adminAddCategories1;
-        private AdminAddUsers adminAddUsers2;
+        private Dashboard dashboard1;
     }
 }

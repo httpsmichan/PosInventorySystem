@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 
 namespace PosInventorySystem
@@ -13,6 +15,20 @@ namespace PosInventorySystem
         public Orders()
         {
             InitializeComponent();
+            displayAllAvailableProducts();
+            displayAllCategories();
+            displayOrders();
+            displayTotalPrice();
+        }
+        private int prodID = 0;
+         private int idGen;
+        public void refreshData()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)refreshData);
+                return;
+            }
             displayAllAvailableProducts();
             displayAllCategories();
             displayOrders();
@@ -275,11 +291,9 @@ namespace PosInventorySystem
             displayTotalPrice();
         }
 
-        private int idGen;
 
         public void IDGenerator()
         {
-
             using (SqlConnection connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\cabri\Documents\Funtilon.mdf;Integrated Security=True;Connect Timeout=30"))
             {
                 connect.Open();
@@ -290,18 +304,10 @@ namespace PosInventorySystem
                 {
                     object result = cmd.ExecuteScalar();
 
-                    if (result != DBNull.Value)
+                    if (result != DBNull.Value && result != null)
                     {
                         int temp = Convert.ToInt32(result);
-
-                        if (temp == 0)
-                        {
-                            idGen = 1;
-                        }
-                        else
-                        {
-                            idGen = temp + 1;
-                        }
+                        idGen = temp + 1;
                     }
                     else
                     {
@@ -310,6 +316,7 @@ namespace PosInventorySystem
                 }
             }
         }
+
 
         private float totalPrice = 0;
         public void displayTotalPrice()
@@ -360,7 +367,7 @@ namespace PosInventorySystem
 
         }
 
-        private int prodID = 0;
+        
         private void order_Gridview1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
         }
@@ -400,10 +407,12 @@ namespace PosInventorySystem
                             connect.Close();
                         }
                     }
+               
+                    prodID = 0;
+                    displayOrders(); 
+                    displayTotalPrice(); 
                 }
             }
-            displayOrders();
-            displayTotalPrice();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -424,6 +433,10 @@ namespace PosInventorySystem
             order_prodName.Text = "";
             order_Totalprice.Text = "";
             order_qty.Value = 0;
+            dataGridView1.DataSource = null;
+            order_Cashamount.Text = "";
+            order_Change.Text = "";
+            totalPrice = 0;
         }
         private void order_clearbtn_Click(object sender, EventArgs e)
         {
@@ -434,7 +447,7 @@ namespace PosInventorySystem
         {
             IDGenerator();
 
-            if (order_Cashamount.Text == "" || dataGridView1.Rows.Count < 0)
+            if (order_Cashamount.Text == "" || dataGridView1.Rows.Count <= 0)
             {
                 MessageBox.Show("Something went wrong", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -448,6 +461,7 @@ namespace PosInventorySystem
                         {
                             connect.Open();
 
+                            // Insert data into the Billing table
                             string insertData = "INSERT INTO Billing (CustomerID, ProductID, TotalPrice, Amount, Change, OrderDate)" +
                                 "VALUES (@cID, @pID, @totalP, @amount, @change, @odate)";
 
@@ -463,10 +477,18 @@ namespace PosInventorySystem
                                 cmd.Parameters.AddWithValue("@odate", today);
 
                                 cmd.ExecuteNonQuery();
-                                clearFields();
-
-                                MessageBox.Show("Paid Successfully", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
+
+                            // Clear the Purchase table for this customer
+                            string deletePurchase = "DELETE FROM Purchase WHERE CustomerID = @cID";
+                            using (SqlCommand cmdDelete = new SqlCommand(deletePurchase, connect))
+                            {
+                                cmdDelete.Parameters.AddWithValue("@cID", idGen);
+                                cmdDelete.ExecuteNonQuery();
+                            }
+
+                            clearFields();
+                            MessageBox.Show("Paid Successfully", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         catch (Exception ex)
                         {
@@ -479,7 +501,10 @@ namespace PosInventorySystem
                     }
                 }
             }
+            displayOrders();
             displayTotalPrice();
+            order_Cashamount.Text = "";
+            order_Change.Text = "";
 
         }
 
@@ -511,6 +536,143 @@ namespace PosInventorySystem
                     order_Change.Text = "";
                 }
             }
+        }
+
+        private int rowIndex = 0;
+
+        private void order_Printreceipt_Click(object sender, EventArgs e)
+        {
+            if (order_Cashamount.Text == "" || dataGridView1.Rows.Count <= 0)
+            {
+                MessageBox.Show("Please order first", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
+                printDocument1.BeginPrint += new PrintEventHandler(printDocument1_BeginPrint);
+
+                printPreviewDialog1.Document = printDocument1;
+                printPreviewDialog1.ShowDialog();
+
+                // Clear the Purchase table for this customer after printing the receipt
+                if (checkConnection())
+                {
+                    try
+                    {
+                        connect.Open();
+
+                        string deletePurchase = "DELETE FROM Purchase WHERE CustomerID = @cID";
+                        using (SqlCommand cmdDelete = new SqlCommand(deletePurchase, connect))
+                        {
+                            cmdDelete.Parameters.AddWithValue("@cID", idGen);
+                            cmdDelete.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Connection failed: " + ex, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        connect.Close();
+                    }
+                }
+
+                clearFields();
+                order_Cashamount.Text = "";
+                order_Change.Text = "";
+            }
+        }
+
+        private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            rowIndex = 0;
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            displayTotalPrice();
+
+            float y = 0;
+            int count = 0;
+            int colWidth = 80;
+            int headerMargin = 8;
+            int tableMargin = 10;
+
+            Font font = new Font("Arial", 7);
+            Font bold = new Font("Arial", 7, FontStyle.Bold);
+            Font headerFont = new Font("Arial", 12, FontStyle.Bold);
+            Font labelFont = new Font("Arial", 7, FontStyle.Bold);
+
+            float margin = e.MarginBounds.Top;
+
+            StringFormat alignCenter = new StringFormat();
+            alignCenter.Alignment = StringAlignment.Center;
+            alignCenter.LineAlignment = StringAlignment.Center;
+
+            string headerText = "Funtilon's Inventory Management System";
+            y = (margin + count * headerFont.GetHeight(e.Graphics) + headerMargin);
+            e.Graphics.DrawString(headerText, headerFont, Brushes.Black, e.MarginBounds.Left + (dataGridView1.Columns.Count / 2) * colWidth, y, alignCenter);
+
+            count++;
+            y += tableMargin;
+
+            string[] header = { "PurchaseID", "CustomerID", "ProductID", "ProductName", "Category", "OriginalPrice", "Quantity", "Subtotal", "OrderDate" };
+
+            for (int q = 0; q < header.Length; q++)
+            {
+                y = margin + count * bold.GetHeight(e.Graphics) + headerMargin;
+                e.Graphics.DrawString(header[q], bold, Brushes.Black, e.MarginBounds.Left + q * colWidth, y, alignCenter);
+            }
+            count++;
+
+            float rSpace = e.MarginBounds.Bottom - y;
+
+            while (rowIndex < dataGridView1.Rows.Count)
+            {
+                DataGridViewRow row = dataGridView1.Rows[rowIndex];
+
+                for (int q = 0; q < dataGridView1.Columns.Count; q++)
+                {
+                    object cellValue = row.Cells[q].Value;
+                    string cell = (cellValue != null) ? cellValue.ToString() : string.Empty;
+
+                    y = margin + count * font.GetHeight(e.Graphics) + tableMargin;
+                    e.Graphics.DrawString(cell, font, Brushes.Black, e.MarginBounds.Left + q * colWidth, y, alignCenter);
+                }
+                count++;
+                rowIndex++;
+
+                if (y + font.GetHeight(e.Graphics) > e.MarginBounds.Bottom)
+                {
+                    e.HasMorePages = true;
+                    return;
+                }
+            }
+            int labelMargin = (int)Math.Min(rSpace, 200);
+
+            DateTime today = DateTime.Now;
+
+            float labelX = e.MarginBounds.Right - e.Graphics.MeasureString("--------------------------", labelFont).Width;
+
+            y = e.MarginBounds.Bottom - labelMargin - labelFont.GetHeight(e.Graphics);
+
+            e.Graphics.DrawString("Total Price: \t₱" + totalPrice + "\nAmount: \t₱" + order_Cashamount.Text.Trim()
+                + "\n\t\t-------------------\nChange: \t₱" + order_Change.Text.Trim(), labelFont, Brushes.Black, labelX, y);
+
+            labelMargin = (int)Math.Min(rSpace, -40);
+
+            string labelText = today.ToString();
+            y = e.MarginBounds.Bottom - labelMargin - labelFont.GetHeight(e.Graphics);
+            e.Graphics.DrawString(labelText, labelFont, Brushes.Black, e.MarginBounds.Right -
+                e.Graphics.MeasureString("-------------------", labelFont).Width, y);
+
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            clearFields();
         }
     }
 }
