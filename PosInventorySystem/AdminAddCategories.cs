@@ -17,6 +17,15 @@ namespace PosInventorySystem
             displayCategoriesData();
         }
 
+        public void refreshData()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)refreshData);
+                return;
+            }
+            displayCategoriesData();
+        }
 
         public void displayCategoriesData()
         {

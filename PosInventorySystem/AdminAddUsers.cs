@@ -17,6 +17,16 @@ namespace PosInventorySystem
             displayAllUsersData();
         }
 
+        public void refreshData()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)refreshData);
+                return;
+            }
+            displayAllUsersData();
+        }
+
         public void displayAllUsersData()
         {
             UsersData udata = new UsersData();

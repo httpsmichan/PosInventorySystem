@@ -7,12 +7,15 @@ namespace PosInventorySystem
 {
     public partial class Form1 : Form
     {
+        public static string username;
+
         SqlConnection
             connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\cabri\Documents\Funtilon.mdf;Integrated Security=True;Connect Timeout=30");
         public Form1()
         {
             InitializeComponent();
         }
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -80,6 +83,8 @@ namespace PosInventorySystem
                                 getRole.Parameters.AddWithValue("@pass", login_password.Text.Trim());
 
                                 string userRole = getRole.ExecuteScalar() as string;
+
+                                username = login_username.Text.Trim();
 
                                 MessageBox.Show("Login successfully!", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

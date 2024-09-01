@@ -17,6 +17,17 @@ namespace PosInventorySystem
             displayAllProducts();
         }
 
+        public void refreshData()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)refreshData);
+                return;
+            }
+            displayCategories();
+            displayAllProducts();
+        }
+
         public bool emptyFields()
         {
             if (addprod_ID.Text == "" || addprod_name.Text == "" || addprod_category.SelectedIndex == -1
